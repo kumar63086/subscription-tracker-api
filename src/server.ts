@@ -1,22 +1,28 @@
-import express from 'express';
-
+import express, { Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import cors from "cors";
-import dotenv from "dotenv";
-dotenv.config();
+import connectToDatabase from "./database/db"
+import { PORT } from './config/env';
+import authRouter from './routes/auth.route';
+import {ORIGIN} from './config/env';
 const app = express();
-const PORT = process.env.PORT || 3000;
+
 
 app.use(cors({
-    origin: '*',  // Allow all origins
+    origin: ORIGIN,  // Allow all origins
+    credentials: true  // Allow credentials
   }));
   
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use('/api/v1/auth', authRouter);
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/", ( req: Request, res: Response ) => {
+  res.send('Welcome to the Subscription Tracker API!');
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+    console.log(`Subscription Tracker API is running on http://localhost:${PORT}`);
+    connectToDatabase();
 });
