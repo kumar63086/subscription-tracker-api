@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2016",                         // Specify ECMAScript target version
+    "module": "commonjs",                       // Use CommonJS for module resolution
+    "strict": true,                             // Enable strict type checking
+    "esModuleInterop": true,                    // Allows default imports from modules with no default export
+    "skipLibCheck": true,                       // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true,   // Ensure consistent file naming
+    "outDir": "./dist",                         // Output directory for compiled files
+    "rootDir": "./src",                         // Root directory of source files
+    "resolveJsonModule": true,                  // Allows importing .json files
+    "typeRoots": ["./node_modules/@types"],     // Define where TypeScript should look for types
+    "baseUrl": ".",                             // Base URL for module resolution
+    "paths": {
+      "": ["node_modules/"]                   // Resolve modules
+    }
+  },
+  "include": ["src/**/*.ts"],                      // Files to include in the compilation
+  "exclude": ["node_modules", "dist"]  
+}
